@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stack>
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+void plan(int index, int input[][4], stack<char>* output);
+
+int main(int argc, char** argv)
+	{ 
+	//initialize total the matrix, and the decission stack
+	int total = 0;
+	int hi_low_mat [2][4] = {{10,  1, 10, 10},
+							 { 5, 50,  5,  1}};
+	stack<char> decissions;
+	int index = 0;
+	
+	//call plan to start recurssion
+	plan(index, hi_low_mat, &decissions);
+	
+	//loop to print/calculate what decissions where made
+	while(!decissions.empty())
+		{ //print
+		cout<<decissions.top()<<" ";
+		//if delay add 0 to total
+		if (decissions.top() == 'd')
+			total += 0;
+		//if low stress was choosen add it to total
+		else if (decissions.top() == 'l')
+			total += hi_low_mat[0][index];
+		//if high stress was choosen add it to total
+		else
+			total += hi_low_mat[1][index];
+		//incerment index and pop the top of the stack to get to next
+		index++;
+		decissions.pop();
+		}
+	//print total
+	cout<<total<<endl;
+	return 1;
+	}
+	
+void plan(int index, int input[][4], stack<char>* output)
+	{
+	//if not at the end ->recurse
+	if ((output->empty())&&(index != (sizeof(input[0])/4)-1))
+		plan(index+1, input, output);
+	//check what values are there
+	//check if low is > than high
+	if (input[0][index] > input[1][index])
+		{ //make sure that the output is not empty segs otherwise
+		  //if last decission was high stress delay this week
+		if ((!output->empty())&&(output->top() == 'h'))
+				output->push('d');
+		  //else pick low since that is most profitable
+		else
+			output->push('l');
+		}
+		//if high is greater pick high
+	else if (input[0][index] < input[1][index])
+		output->push('h');
+	//return to where called 
+	return;
+	}

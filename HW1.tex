@@ -1,0 +1,112 @@
+\documentclass[[12pts]{report}
+
+\usepackage{qtree}
+\usepackage{listings}
+
+\title{CS 477 Homework \\ Assignment 01}
+\date{September, 2014}
+\author{Charles Coulton}
+
+\setlength{\topmargin}{-1cm}
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{8.3in}
+
+
+%%Currently default settings for indentation and symbols.
+%%Try these by uncommenting this block!!!
+%%Redefine the first level symbols
+%\renewcommand{\theenumi}{\fnsymbol{enumi}-}
+%\renewcommand{\labelenumi}{\theenumi}
+%
+%%Redefine the second level symbols
+%\renewcommand{\theenumii}{\alph{enumii})}
+%\renewcommand{\labelenumii}{\theenumii}
+%
+%%Redefine the third level symbols
+%\renewcommand{\theenumiii}{\roman{enumiii}.}
+%\renewcommand{\labelenumiii}{\theenumiii}
+%
+%%Options for redefining levels
+
+
+%\arabic
+%\alph 
+%\Alph
+%\roman
+%\Roman
+%\fnsymbol
+%This ^^^ is all you need to change!!
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+	\item  
+	Sort functions by growth rate.
+	\begin{enumerate}
+		\item
+		$2^{\sqrt{log{n}}}$
+		\item
+		$2^{4/3}$
+		\item
+		${n}{{log}^3{n}}$
+		\item
+		$n^{log{n}}$
+		\item
+		$2^n$
+		\item
+		$2^{2^n} or 4^n$
+		\item
+		${2^{{n}^2}}$
+	\end{enumerate}
+	\item
+	Prove functions using induction proofs prove the following:
+	\begin{enumerate}
+		\item
+		Equation: $$\sum_{i=1}^n i(i)! = (n+1)! -1$$ \\
+		Solve for Base step $n =1$
+		$1!*1 = (1+1) -1$ leads to  $1*1 = 2 -1$ which equals $1 = 1$\\
+		Next since that was true Assume for n+1 is true so induction step:\\
+		$$\sum_{i=1}^{n+1} i(i)! = ((n+1)+1)!-1$$ \\
+		In so that $\sum_{i=1}^n i(i)! + (n+1)*(n+1)!= \sum_{i=1}^{n+1}(i)*(i)!$ and since we found that\\ 
+		$\sum_{i=1}^n i(i)! = (n+1)! -1$ in the last step lets replace these into the previous statements.\\
+		$$(n+1)!-1 +(n+1)*(n+1)! = ((n+1)+1)!-1$$ \\
+		With that cancel the -1 on both sides, and factor the (n+1)! from the items, which makes the equation look like this: \\
+		$$(n+1)!(1+(n+1)) = (n+2)!$$ \\
+		Given that n factorial is defined as n*(n-1)...*2*1, or n*(n-1)! so (n+2)! = n+2*(n+1)!.  With this in mind we can divide and cancel the (n+1)! on both sides, making the equation look thus: \\
+		$$(n+1)!(n+2) = (n+2)(n+1)!$$
+		This makes the equation balance at n+2 = n+2.\\
+		\item
+		Equation:
+		$$\sum_{i=1}^n i^3 = |\frac{n(n+1)}{2}|^2$$
+		Basis step n = 1, $1^3 = |\frac{1(1+1)}{2}|^2$ solving these equations you would get 1 = 1*4/4 so 1 = 1 \\\\
+		Induction step: Assume that n+1 is true so that 
+		$$\sum_{i=1}^{n+1} i^3=|\frac{(n+1)((n+1)+1)}{2}|^2$$\\
+		With that in place we can do the replacements of $\sum_{i=1}^{n+1} i^3 = \sum_{i=1}^ni^3 + (n+1)^3$thus with that in place we can replace the other sum because of the last step stating $\sum_{i=1}^n i^3= |\frac{n(n+1)}{2}|^2$, so with those we can make the equation look like this:
+		$$|\frac{n(n+1)}{2}|^2+(n+1)^3 = |\frac{(n+1)(n+2)}{2}|^2$$
+		If we simplify the squares, and multiply the middle term by 4 and divide by 4 we get the equation like:
+		$$\frac{n^2(n+1)^2}{4} + \frac{4(n+1)^3}{4} = \frac{(n+1)^2(n+2)^2}{4}$$
+		Canceling the common 4 term under all the terms and factoring $(n+1)^2$ terms gets us to this:
+		$$(n+1)^2*(n^2+4(n+1)) = (n+1)^2(n+2)^2$$
+		Next step is to cancel the $(n+1)^2$ terms on both sides, after this Foil the $(n+2)^2$ term and distrubute the 4 inside the parathese giveing us finally:
+		$$n^2+4n+4 = n^2+4n+4$$
+	\end{enumerate}
+	\item 
+	Find the recurrance but don't solve it for:\lstset{language = C++, basicstyle =\footnotesize}
+	\begin{lstlisting}
+	int Example(int n)
+		{
+		if (n == 1)
+			return;
+		for(int i = 1; i<= n; i++)
+			x += 1;
+		y = example(n/2) + example(n-1);
+		}
+		
+	  \end{lstlisting}
+	
+	
+\end{enumerate}
+\end{document}
